@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="utf-8">
+	<title>JS Plugin Boilerplate</title>
+
+	<!-- Load local QUnit. -->
+	<link rel="stylesheet" href="../node_modules/qunitjs/qunit/qunit.css" media="screen">
+	<script src="../node_modules/qunitjs/qunit/qunit.css"></script>
+
+	<!--
+	Don't forget to load any dependencies that you specified in the
+	wp_register_scripts call within js-plugin-boilerplate.php, too!
+	-->
+
+</head>
+<body>
+
+	<h1 id="qunit-header">JavaScript Plugin Boilerplate</h1>
+	<h2 id="qunit-banner"></h2>
+	<div id="qunit-testrunner-toolbar"></div>
+	<h2 id="qunit-userAgent"></h2>
+	<ol id="qunit-tests"></ol>
+
+	<!-- Load Require.js itself, but don't specify a `data-main` attribute -->
+	<script type="text/javascript" src="../node_modules/requirejs/require.js"></script>
+
+	<!-- This script is responsible for loading the test .js files via AMD -->
+	<script type="text/javascript" src="require-config.js"></script>
+
+</body>
+</html>
