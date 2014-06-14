@@ -1,3 +1,4 @@
+/* global requirejs:false, console:false */
 // Prevent automatic test execution
 QUnit.config.autostart = false;
 
@@ -10,6 +11,7 @@ var testBaseDir = '../../tests/js/';
 
 // Require the test files, so that we can know when they've loaded
 // (and therefore when we're ready to run QUnit)
+console.log('so far so good');
 requirejs([
 	// Prepending all test paths with '../../tests/js' tells Require to
 	// load *these* modules from the tests directory, not from the
@@ -19,5 +21,5 @@ requirejs([
 	testBaseDir + 'identity',
 	testBaseDir + 'other-module'
 ], function(/* the test modules don't export anything */) {
-	QUnit.init();
+	QUnit.start();
 });

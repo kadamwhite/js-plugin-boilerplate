@@ -1,7 +1,9 @@
 /* jshint node:true */
 module.exports = function( grunt ) {
+	'use strict';
+
 	// Load tasks.
-	require( 'matchdep' ).filterDev( 'grunt-*').forEach( grunt.loadNpmTasks );
+	require( 'matchdep' ).filterDev( 'grunt-contrib-*').forEach( grunt.loadNpmTasks );
 
 	grunt.initConfig({
 		pkg: grunt.file.readJSON( 'package.json' ),
@@ -18,23 +20,27 @@ module.exports = function( grunt ) {
 			},
 			core: {
 				src: [
-					'js/*.js'
+					'js/src/**/*.js',
+					// This assumes you don't want to lint 3rd-party deps in /lib
+					'!js/src/lib/**/*.js'
 				]
 			}
 		},
-		uglify: {
-			js: {
+		requirejs: {
+			compile: {
 				options: {
-					sourceMap: true
-				},
-				files: {
-					'build/js/wp-api.min.js': [
-						'js/app.js',
-						'js/utils.js',
-						'js/models.js',
-						'js/views.js',
-						'js/collections.js'
-					]
+					baseUrl: 'js/src',
+					// We need to redeclare our shim since the require-config.js file
+					// is designed to be localized by WP, not consumed via node tasks.
+					shim: {
+						'lib/module-maker': {
+							exports: 'ModuleMaker'
+						}
+					},
+					// Call to `include()` takes a baseUrl-relative filename
+					// Could also do `name: 'app.js'`
+					include: [ 'app' ],
+					out: 'js/build/app.js'
 				}
 			}
 		},
@@ -42,10 +48,19 @@ module.exports = function( grunt ) {
 			all: [ 'tests/*.html' ]
 		},
 		watch: {
-			files: [
-				'js/*.js'
-			],
-			tasks: [ 'jshint', 'qunit' ]
+			test: {
+				files: [
+					'js/src/**/*.js',
+					'!js/src/lib/**/*.js'
+				],
+				tasks: [ 'jshint', 'qunit' ]
+			},
+			build: {
+				files: [
+					'js/src/**/*.js'
+				],
+				tasks: [ 'jshint', 'requirejs' ]
+			}
 		}
 	});
 

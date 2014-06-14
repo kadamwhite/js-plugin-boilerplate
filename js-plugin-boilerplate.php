@@ -51,6 +51,18 @@ function js_boilerplate_load_scripts() {
 		true
 	);
 
+	// Now that the plugin's script is registered, localize it to add the
+	// script source directory path to the RequireJS configuration
+	if ( WP_DEBUG ) {
+		wp_localize_script(
+			'js-plugin-boilerplate',
+			'REQUIRE_CONFIGURATION',
+			array(
+				'baseUrl' => $plugin_path . 'js/src'
+			)
+		);
+	}
+
 	// Enqueue the plugin's script
 	wp_enqueue_script( 'js-plugin-boilerplate' );
 }
