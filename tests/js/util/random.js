@@ -10,11 +10,11 @@ define([ 'util/random' ], function( random ) {
 		// This is a really clumsy test since we're testing randomness.
 		// I probably should have wrapped Math in a module, so we could
 		// mock out the underlying Math.random with a stub.
-		for ( i = 0; i < 100; i++ ) {
+		for ( i = 0; i < iterations; i++ ) {
 			randomVal = random();
 			assert.ok( Math.floor( randomVal ) === randomVal, 'value is an integer' );
 			assert.ok( randomVal <= 10, 'value is no greater than ten' );
 			assert.ok( randomVal >= 1, 'value is no less than one' );
 		}
-	})
+	});
 });
