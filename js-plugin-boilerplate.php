@@ -45,7 +45,7 @@ function js_boilerplate_load_scripts() {
 		'js-plugin-boilerplate',
 		'REQUIRE_CONFIGURATION',
 		array(
-			'baseUrl' => $plugin_path . ( WP_DEBUG ? 'js/src' : 'js/build' )
+			'baseUrl' => $plugin_path . ( SCRIPT_DEBUG ? 'js/src' : 'js/build' )
 		)
 	);
 
