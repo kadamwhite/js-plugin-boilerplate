@@ -1,6 +1,12 @@
 A Modular JavaScript Plugin Boilerplate for WordPress
 =====================================================
 
+> ## Important Note
+> Gregory Cornelius pointed out an issue with how this is set up at present, so if you use this technique on a page where Backbone or another AMD-compatible script is available on the page, things will break.
+> 
+> We're working on a fix, and I'll post an article explaining how to use this once we think it's a truly stable foundation!
+
+
 If JavaScript is a "first-class citizen" in your plugin, you may have a lot of it. If you have a lot of JavaScript, you should probably be modularizing your code and splitting those modules up into files to aid development.
 
 [Require.js](http://requirejs.org) is a popular tool for authoring JavaScript in the AMD format ("Asynchronous Module Definition"). AMD is great, but it can be daunting to get up and running with all the configuration needed to take advantage of require—*especially* if you're going to be doing so within a WordPress theme or plugin! This boilerplate is an attempt to provide an example of a basic AMD setup, with all of that WordPress-specific configuration provided.
