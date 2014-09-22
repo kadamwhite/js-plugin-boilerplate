@@ -37,10 +37,46 @@ module.exports = function( grunt ) {
 							exports: 'ModuleMaker'
 						}
 					},
+					// Use the "optimize" property to specify your minifier (or lack
+					// thereof): e.g., comment this next line out to disable minification
+					optimize: 'none',
 					// Call to `include()` takes a baseUrl-relative filename
 					// Could also do `name: 'app.js'`
 					include: [ 'app' ],
-					out: 'js/build/app.js'
+					// Render the assembled application to a file:
+					out: 'js/build/app.js',
+					// And finally, prepare it for use alongside other WP plugins:
+					onBuildWrite: function( name, path, contents ) {
+						return require( 'amdclean' ).clean({
+							code: contents,
+							prefixMode: 'camelCase'//,
+							// escodegen: {
+							// 	format: {
+							// 		indent: { style: '  ' }
+							// 	}
+							// }
+						});
+					}
+					// onModuleBundleComplete: function( data ) {
+					// 	// In order to use Require-managed files alongside files declared with
+					// 	// Universal Module Definition (UMD), such as jQuery or Backbone, we
+					// 	// use the AMDClean module to remove the traces of Require which would
+					// 	// conflict with UMD's handling of the "define" function. Since most
+					// 	// of WordPress is *not* an AMD context, this is essential to avoid
+					// 	// breaking JavaScript from other plugins!
+					// 	//
+					// 	// For more details, see the AMDClean documentation:
+					// 	// https://github.com/gfranko/amdclean#amdclean-with-the-requirejs-optimizer
+					// 	var fs = require( 'fs' );
+					// 	var amdclean = require( 'amdclean' );
+					// 	var outputFile = data.path;
+
+					// 	console.log(outputFile);
+
+					// 	fs.writeFileSync( outputFile, amdclean.clean({
+					// 		filePath: outputFile
+					// 	}));
+					// }
 				}
 			}
 		},

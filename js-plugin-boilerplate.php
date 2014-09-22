@@ -29,25 +29,41 @@ function js_boilerplate_load_scripts() {
 		true
 	);
 
-	// Register the js-plugin-boilerplate script
-	wp_register_script(
-		'js-plugin-boilerplate',
-		$plugin_path . 'js/require-config.js',
-		array( 'require' ),
-		'0.1.0',
-		true
-	);
+	if ( SCRIPT_DEBUG ) {
 
-	// Now that the plugin's script is registered, localize it to add the
-	// script source directory path to the RequireJS configuration
-	// (path will either be to the separate files, or the build single file)
-	wp_localize_script(
-		'js-plugin-boilerplate',
-		'REQUIRE_CONFIGURATION',
-		array(
-			'baseUrl' => $plugin_path . ( SCRIPT_DEBUG ? 'js/src' : 'js/build' )
-		)
-	);
+		// Register the js-plugin-boilerplate script
+		wp_register_script(
+			'js-plugin-boilerplate',
+			$plugin_path . 'js/require-config.js',
+			array( 'require' ),
+			'0.1.0',
+			true
+		);
+
+		// Now that the plugin's script is registered, localize it to add the
+		// script source directory path to the RequireJS configuration
+		// (path will either be to the separate files, or the build single file)
+		wp_localize_script(
+			'js-plugin-boilerplate',
+			'REQUIRE_CONFIGURATION',
+			array(
+				'baseUrl' => $plugin_path . ( SCRIPT_DEBUG ? 'js/src' : 'js/build' )
+			)
+		);
+
+	} else {
+
+		// If we're not in script debug mode, load the built version of the plugin
+		// directly (without going through Require)
+		wp_register_script(
+			'js-plugin-boilerplate',
+			$plugin_path . 'js/build/app.js',
+			array(),
+			'0.1.0',
+			true
+		);
+
+	}
 
 	// Enqueue the plugin's script
 	wp_enqueue_script( 'js-plugin-boilerplate' );
