@@ -5,6 +5,7 @@
 // See require-config.js for how we tell Require to use the global
 // ModuleMaker object when this file is requested via AMD
 /** An extremely basic constructor */
+var lib_module_maker, util_random, app, _module1_, _module2_;
 function ModuleMaker(name) {
   if (!(this instanceof ModuleMaker)) {
     return new ModuleMaker(name);
@@ -17,26 +18,15 @@ ModuleMaker.prototype.init = function () {
   // Permit chaining, just 'cause
   return this;
 };
-}());
-define("lib/module-maker", (function (global) {
-    return function () {
-        var ret, fn;
-        return ret || global.ModuleMaker;
-    };
-}(this)));
-
-;(function() {
+lib_module_maker = window.ModuleMaker;
 /**
  * Returns a random integer from 1 through 10
  *
  * @module random
  */
-var utilRandom;
-utilRandom = function () {
+util_random = function () {
   return Math.floor(Math.random() * 10) + 1;
 };
-}());
-;(function() {
 /* global console:false */
 /**
  * Depends on a shim'd 3rd-party library and exports a module instance
@@ -45,10 +35,9 @@ utilRandom = function () {
  * @requires lib/module-maker
  * @requires util/random
  */
-var _module1_;
 _module1_ = function (exports) {
   
-  var AppModule = libModuleMaker, random = utilRandom,
+  var AppModule = lib_module_maker, random = util_random,
     // Create our local module instance
     module1 = new AppModule('module1');
   for (var key in module1.prototype) {
@@ -61,17 +50,12 @@ _module1_ = function (exports) {
   exports = module1;
   return exports;
 }({});
-}());
-;(function() {
 /**
  * A simple module that returns an object literal
  *
  * @module module2
  */
-var module2;
-module2 = { name: 'module2' };
-}());
-;(function() {
+_module2_ = { name: 'module2' };
 /* global console:false */
 /**
  * Demonstrates a very bare-bones modular application structure
@@ -80,7 +64,6 @@ module2 = { name: 'module2' };
  * @requires module1
  * @requires module2
  */
-var app, _module1_, _module2_;
 app = function (require) {
   
   var module1 = _module1_, module2 = _module2_;
