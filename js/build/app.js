@@ -5,7 +5,7 @@
 // See require-config.js for how we tell Require to use the global
 // ModuleMaker object when this file is requested via AMD
 /** An extremely basic constructor */
-var lib_module_maker, util_random, app, _module1_, _module2_;
+var lib_module_maker, util_random, module2, app, _module1_;
 function ModuleMaker(name) {
   if (!(this instanceof ModuleMaker)) {
     return new ModuleMaker(name);
@@ -35,11 +35,10 @@ util_random = function () {
  * @requires lib/module-maker
  * @requires util/random
  */
-_module1_ = function (exports) {
+_module1_ = function (AppModule, random) {
   
-  var AppModule = lib_module_maker, random = util_random,
-    // Create our local module instance
-    module1 = new AppModule('module1');
+  // Create our local module instance
+  var module1 = new AppModule('module1');
   for (var key in module1.prototype) {
     console.log(key, typeof key, module1[key]);
   }
@@ -47,15 +46,14 @@ _module1_ = function (exports) {
   // (could also be written `module1.random = require( 'util/random' );` )
   module1.random = random;
   // Export module1 for use elsewhere
-  exports = module1;
-  return exports;
-}({});
+  return module1;
+}(lib_module_maker, util_random);
 /**
  * A simple module that returns an object literal
  *
  * @module module2
  */
-_module2_ = { name: 'module2' };
+module2 = { name: 'module2' };
 /* global console:false */
 /**
  * Demonstrates a very bare-bones modular application structure
@@ -64,12 +62,9 @@ _module2_ = { name: 'module2' };
  * @requires module1
  * @requires module2
  */
-app = function (require) {
+app = function (module1, module2) {
   
-  var module1 = _module1_, module2 = _module2_;
   module1.init();
-  if (module2) {
-    console.log('%s loaded', module2.name);
-  }
-}({});
+  console.log('%s loaded', module2.name);
+}(_module1_, module2);
 }());
