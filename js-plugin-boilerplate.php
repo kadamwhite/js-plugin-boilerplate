@@ -42,12 +42,11 @@ function js_boilerplate_load_scripts() {
 
 		// Now that the plugin's script is registered, localize it to add the
 		// script source directory path to the RequireJS configuration
-		// (path will either be to the separate files, or the build single file)
 		wp_localize_script(
 			'js-plugin-boilerplate',
 			'REQUIRE_CONFIGURATION',
 			array(
-				'baseUrl' => $plugin_path . ( SCRIPT_DEBUG ? 'js/src' : 'js/build' )
+				'baseUrl' => $plugin_path . 'js/src'
 			)
 		);
 
