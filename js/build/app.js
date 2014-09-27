@@ -1,23 +1,6 @@
 ;(function() {
-// This is not a real third-party module, but should demonstrate how to
-// "shim" non-AMD files so that they can still be loaded via Require.
-// This module saves its value to a global ModuleMaker object:
-// See require-config.js for how we tell Require to use the global
-// ModuleMaker object when this file is requested via AMD
-/** An extremely basic constructor */
-var lib_module_maker, util_random, module2, app, _module1_;
-function ModuleMaker(name) {
-  if (!(this instanceof ModuleMaker)) {
-    return new ModuleMaker(name);
-  }
-  this.name = name;
-}
-/** An extremely simplistic prototype method */
-ModuleMaker.prototype.init = function () {
-  console.log('Initialized module "' + this.name + '"');
-  // Permit chaining, just 'cause
-  return this;
-};
+var jquery, lib_module_maker, util_random, module2, app, _module1_;
+jquery = window.jQuery;
 lib_module_maker = window.ModuleMaker;
 /**
  * Returns a random integer from 1 through 10
@@ -62,9 +45,10 @@ module2 = { name: 'module2' };
  * @requires module1
  * @requires module2
  */
-app = function (module1, module2) {
+app = function ($, module1, module2) {
   
   module1.init();
   console.log('%s loaded', module2.name);
-}(_module1_, module2);
+  $('.entry-title').text('Demo Loaded!');
+}(jquery, _module1_, module2);
 }());
