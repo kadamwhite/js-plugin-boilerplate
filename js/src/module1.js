@@ -6,13 +6,14 @@
  * @requires lib/module-maker
  * @requires util/random
  */
-define(function( require, exports, module ) {
+define([
+	'lib/module-maker',
+	'util/random'
+], function( AppModule, random ) {
 	'use strict';
 
-	var AppModule = require( 'lib/module-maker' ),
-		random = require( 'util/random' ),
-		// Create our local module instance
-		module1 = new AppModule( 'module1' );
+	// Create our local module instance
+	var module1 = new AppModule( 'module1' );
 
 	for ( var key in module1.prototype ) {
 		console.log( key, typeof key, module1[ key ] );
@@ -23,5 +24,5 @@ define(function( require, exports, module ) {
 	module1.random = random;
 
 	// Export module1 for use elsewhere
-	module.exports = module1;
+	return module1;
 });

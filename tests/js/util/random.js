@@ -1,10 +1,10 @@
 define([ 'util/random' ], function( random ) {
 
-	test( 'random is a function', function() {
-		assert.ok( random.name === 'random' );
+	test( 'random is a function', function( assert ) {
+		assert.equal( typeof random, 'function' );
 	});
 
-	test( 'random produces integers no smaller than 1 and no greater than 10', function() {
+	test( 'random produces integers no smaller than 1 and no greater than 10', function( assert ) {
 		var i, randomVal,
 			iterations = 100;
 		// This is a really clumsy test since we're testing randomness.

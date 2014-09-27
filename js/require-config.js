@@ -7,6 +7,13 @@ require.config({
 	// separate configuration within the Grunt task for building the release version
 	baseUrl: REQUIRE_CONFIGURATION.baseUrl,
 
+	// We specify a custom path here for jQuery, since it gets loaded through
+	// a normal script tag and we use a hand-written shim to include it in our
+	// application as a module.
+	paths: {
+		jquery: 'shims/jquery'
+	},
+
 	// The shim is not an essential part of the configuration if all of your
 	// modules are formatted for AMD; however, many jQuery plugins and other
 	// libraries will not work out of the box. Shimming those modules lets you
@@ -15,11 +22,10 @@ require.config({
 	shim: {
 		// Identify any non-AMD modules in your system...
 		'lib/module-maker': {
-			// optionally specify AMD dependencies...
+			// optionally specify dependency modules...
 			// deps: [ 'jquery' ],
 
 			// and then tell Require the identifier to grab off the global scope
-			// in place of the module.
 			exports: 'ModuleMaker'
 		}
 	}
