@@ -21,10 +21,13 @@ For more background on structuring your code see the slides for [Modular JavaScr
 
 This is a sampling of other AMD or Modular JS resources I've found through some cursory Googling. **If you find other resources, please let me know on twitter or by opening an issue (see below):** for Require in particular I know there are other great resources out there, but I need help rounding them up!
 
+* [RequireJS: A JavaScript Module Loader](http://gregfranko.com/requirejs-talk/), a slide deck by Greg Franko
 * [Writing Modular JavaScript](http://addyosmani.com/writing-modular-js/), by Addy Osmani
 * [Using RequireJS In WordPress](http://kaidez.com/requirejs-wordpress/), by Kai Gittens
 * [Understanding Require.js](http://www.sitepoint.com/understanding-requirejs-for-effective-javascript-module-loading/), on SitePoint
 * [Require.js API documentation](http://requirejs.org/docs/api.html)
+* [Browserify](http://http://browserify.org/), a Node.js-oriented alternative to the RequireJS optimizer
+* [es6-module-transpiler](https://github.com/square/es6-module-transpiler), a way to use the upcoming [native JavaScript module syntax](http://www.2ality.com/2014/09/es6-modules-final.html) in current-generation environments
 
 
 ## Acknowledgements
@@ -33,6 +36,7 @@ This repository was created with guidance and resources from the following kind 
 
 * [Mike Pennisi](https://github.com/jugglinmike)
 * [Tim Branyen](https://github.com/tbranyen)
+* [Gregory Cornelius](http://www.gregorycornelius.com/)
 * [Mika "Ipstenu" Epstein](http://ipstenu.org/)
 * [Kai Gittens](http://kaidez.com)
 * [James Burke](http://requirejs.org/)
