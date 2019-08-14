@@ -39,9 +39,12 @@ module.exports = function( grunt ) {
 					// global scope (since they are loaded as separate script tags by WP)
 					paths: {
 						// This part is the same as require-config...
-						jquery: 'shims/jquery',
-						// ...but this replaces the shim for ModuleMaker:
-						'lib/module-maker': 'shims/module-maker'
+						jquery: 'shims/jquery'
+					},
+					shim: {
+						'lib/module-maker': {
+							exports: 'ModuleMaker'
+						}
 					},
 					// Use the "optimize" property to specify your minifier (or lack
 					// thereof): e.g., comment this next line out to disable minification
@@ -70,22 +73,16 @@ module.exports = function( grunt ) {
 
 							// transformAMDChecks: false,
 							// aggressiveOptimizations: false,
-							ignoreModules: [
-								'ModuleMaker'
-							],
+							// Give AMDClean its own mapping for the above-defined shims, so
+							// that they can be cleaned without any lingering references to
+							// the "define" method
+							shimOverrides: {
+								'lib/module-maker': 'ModuleMaker'
+							},
 
 							// Tell AMDClean to write the cleaned file out to the same
 							// location that was used by the Require.js optimizer
 							filePath: outputFile
-
-							// Give AMDClean its own mapping for the above-defined shims, so
-							// that they can be cleaned without any lingering references to
-							// the "define" method
-							// shimOverrides: {
-							// 	'lib/module-maker': 'window.ModuleMaker',
-							// 	'window.ModuleMaker': 'ModuleMaker'
-							// 	// ModuleMaker: 'window.ModuleMaker'
-							// }
 						}));
 					}
 				}
